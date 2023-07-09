@@ -438,7 +438,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/dvojkat/forum-kit",
-                "reference": "1944edf673570dba53a9adb310042a0bf6f4625b"
+                "reference": "35486d2cf74f358b18512ba3b8d64d64bca21a6e"
             },
             "require": {
                 "prettus/l5-repository": "^2.9"
@@ -447,7 +447,9 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Dvojkat\\Forumkit\\Providers\\ForumServiceProvider"
+                        "Dvojkat\\Forumkit\\Providers\\ForumServiceProvider",
+                        "Dvojkat\\Forumkit\\Providers\\ForumServiceServiceProvider",
+                        "Dvojkat\\Forumkit\\Providers\\ForumRepositoryServiceProvider"
                     ]
                 }
             },

@@ -19,7 +19,9 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Dvojkat\\Forumkit\\Providers\\ForumServiceProvider"
+                "Dvojkat\\Forumkit\\Providers\\ForumServiceProvider",
+                "Dvojkat\\Forumkit\\Providers\\ForumServiceServiceProvider",
+                "Dvojkat\\Forumkit\\Providers\\ForumRepositoryServiceProvider"
             ]
         }
     }

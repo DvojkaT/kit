@@ -18,3 +18,4 @@ yarn-error.log
 /.idea
 /.vscode
 /packages/dvojkat/forum-kit/vendor
+/docker/postgres

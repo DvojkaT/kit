@@ -24,7 +24,7 @@ class StoreThreadRequest extends FormRequest
         return [
             'title' => 'required|string',
             'content' => 'nullable|string',
-            'category_id' => 'nullable|integer|exists:Dvojkat\Forumkit\Models\ThreadCategory, id'
+            'category_id' => 'nullable|integer|exists:Dvojkat\Forumkit\Models\ThreadCategory,id'
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace Dvojkat\Forumkit\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GetThreadsByCategoryRequest extends FormRequest
+class StoreThreadCommentaryForThreadRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,8 @@ class GetThreadsByCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_id' => 'required|integer|exists:Dvojkat\Forumkit\Models\ThreadCategory,id'
+            'text' => 'required|string',
+            'thread_id' => 'required|integer|exists:Dvojkat\Forumkit\Models\Thread,id'
         ];
     }
 }

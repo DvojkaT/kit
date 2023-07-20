@@ -11,8 +11,10 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'api'],function () {
 
         Route::post('/commentaries/thread', [ThreadCommentaryController::class, 'storeForThread']);
         Route::post('/commentaries/commentary', [ThreadCommentaryController::class, 'storeForCommentary']);
+
+        Route::get('commentaries/{id}', [ThreadCommentaryController::class, 'show']);
         Route::get('/aboba', function () {
-            $commentary = \DvojkaT\Forumkit\Models\ThreadCommentary::query()->with(['commentaries', 'commentable'])->find(6);
+            $commentary = \DvojkaT\Forumkit\Models\ThreadCommentary::query()->with(['commentaries', 'commentable'])->find(1);
             dd($commentary);
         });
     Route::get('/categories', [ThreadCategoryController::class, 'getCategories']);

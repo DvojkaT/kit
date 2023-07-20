@@ -45,7 +45,9 @@ class ThreadServiceEloquent implements ThreadServiceInterface
      */
     public function show(int $thread_id): Thread
     {
-        return $this->repository->find($thread_id);
+        $comment = $this->repository->find($thread_id);
+        return $this->commentaryParses($comment);
+
     }
 
     /**

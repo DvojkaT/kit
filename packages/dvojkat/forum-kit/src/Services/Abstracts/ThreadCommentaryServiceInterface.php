@@ -21,4 +21,12 @@ interface ThreadCommentaryServiceInterface
      * @return ThreadCommentary
      */
     public function storeForCommentary(array $fields): ThreadCommentary;
+
+    /**
+     * Получение комментария по id
+     *
+     * @param int $id
+     * @return ThreadCommentary
+     */
+    public function show(int $id): ThreadCommentary;
 }

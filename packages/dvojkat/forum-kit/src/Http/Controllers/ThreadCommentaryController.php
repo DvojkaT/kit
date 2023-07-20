@@ -40,4 +40,11 @@ class ThreadCommentaryController extends Controller
     {
         return new ThreadCommentaryResource($this->service->storeForCommentary($request->validated()));
     }
+
+    public function show(int $id)
+    {
+        return $this->service->show($id);
+    }
+
+
 }

@@ -5,16 +5,14 @@ namespace DvojkaT\Forumkit\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-
-/**
- * @property string $text
- * @property string $commentable_type
- * @property int $commentable_id
- */
+use Illuminate\Support\Collection;
 
 /**
  * @property int $id
  * @property string $text
+ * @property string $commentable_type
+ * @property int $commentable_id
+ * @property Collection<ThreadCommentary> $commentaries
  */
 class ThreadCommentary extends Model
 {
@@ -40,6 +38,6 @@ class ThreadCommentary extends Model
      */
     public function commentaries(): MorphMany
     {
-        return $this->morphMany(ThreadCommentary::class, 'commentable', 'commentable_type', 'commentable_id', 'commentable_id');
+        return $this->morphMany(ThreadCommentary::class, 'commentable', 'commentable_type', 'commentable_id', 'id');
     }
 }

@@ -6,6 +6,7 @@ use Dvojkat\Forumkit\Models\Thread;
 use DvojkaT\Forumkit\Models\ThreadCommentary;
 use Dvojkat\Forumkit\Repositories\Abstracts\ThreadCommentaryRepositoryInterface;
 use Dvojkat\Forumkit\Services\Abstracts\ThreadCommentaryServiceInterface;
+use Illuminate\Support\Collection;
 
 class ThreadCommentaryServiceEloquent implements ThreadCommentaryServiceInterface
 {
@@ -45,10 +46,18 @@ class ThreadCommentaryServiceEloquent implements ThreadCommentaryServiceInterfac
      */
     public function show(int $id): ThreadCommentary
     {
-        $commentary = $this->repository->find($id);
-        $commentary->text = $this->commentaryParses($commentary->text);
+        return $this->repository->find($id);
+    }
 
-        return $commentary;
+    /**
+     * @inheritDoc
+     */
+    public function transformCommentariesToHTML(Collection $commentaries): Collection
+    {
+        return $commentaries->transform(function (ThreadCommentary $commentary) {
+            $commentary->text = $this->commentaryParser($commentary->text);
+            return $commentary;
+        });
     }
 
     /**
@@ -57,14 +66,23 @@ class ThreadCommentaryServiceEloquent implements ThreadCommentaryServiceInterfac
      * @param string $comment
      * @return string
      */
-    private function commentaryParses(string $comment): string
+    private function commentaryParser(string $comment): string
     {
-        preg_replace_callback_array([
-            "(\|(.*?)\|)" => function ($item) use ($comment) {
-                $comment = str_replace($item[0], '<u>'.$item[1].'</u>', $comment);
+        $patterns = [
+            "((\<(.*?)\>))" => function (array $matches) {
+                return "<code>$matches[2]</code>";
             },
-        ], $comment);
-        dd($comment);
-        return $comment;
+            "(\*(.*?)\*)" => function (array $matches) {
+                return str_replace($matches[0], '<u>'.$matches[1].'</u>', $matches[0]);
+            },
+            "((http|ftp|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-]))" => function (array $matches) {
+                return "<a href='$matches[0]'>".$matches[0]."</a>";
+            },
+            '((\|(.*?)\|)([^\s,.;:"]+))' => function (array $matches) {
+                return "<a href='$matches[2]'>".$matches[3]."</a>";
+            },
+        ];
+
+        return preg_replace_callback_array($patterns, $comment);
     }
 }

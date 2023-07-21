@@ -3,6 +3,7 @@
 namespace Dvojkat\Forumkit\Services\Abstracts;
 
 use DvojkaT\Forumkit\Models\ThreadCommentary;
+use Illuminate\Support\Collection;
 
 interface ThreadCommentaryServiceInterface
 {
@@ -29,4 +30,12 @@ interface ThreadCommentaryServiceInterface
      * @return ThreadCommentary
      */
     public function show(int $id): ThreadCommentary;
+
+    /**
+     * Преобразование комментариев к html виду
+     *
+     * @param Collection $commentaries
+     * @return Collection
+     */
+    public function transformCommentariesToHTML(Collection $commentaries): Collection;
 }

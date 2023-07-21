@@ -5,3 +5,5 @@ parameters:
         - packages/dvojkat/forum-kit
     excludePaths:
         - app/Orchid/*
+
+    checkGenericClassInNonGenericObjectType: false

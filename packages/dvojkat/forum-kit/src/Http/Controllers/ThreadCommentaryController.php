@@ -41,6 +41,12 @@ class ThreadCommentaryController extends Controller
         return new ThreadCommentaryResource($this->service->storeForCommentary($request->validated()));
     }
 
+    /**
+     * Вывод комментария по его id
+     *
+     * @param int $id
+     * @return ThreadCommentary
+     */
     public function show(int $id)
     {
         return $this->service->show($id);

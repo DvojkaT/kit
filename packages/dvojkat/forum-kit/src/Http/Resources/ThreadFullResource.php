@@ -29,7 +29,7 @@ class ThreadFullResource extends JsonResource
             'title' => $this->title,
             'content' => $this->content,
             'author' => $this->author->name,
-            'category' => $this->category->title,
+            'category' => $this->category?->title,
             'commentaries' => ThreadCommentaryResource::collection($this->commentaries)
         ];
     }

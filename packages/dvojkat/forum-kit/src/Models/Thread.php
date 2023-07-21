@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use DvojkaT\Forumkit\Models\ThreadCategory;
 use DvojkaT\Forumkit\Models\ThreadCommentary;
@@ -21,8 +22,8 @@ use DvojkaT\Forumkit\Models\ThreadCommentary;
  * @property int $image_id
  * @property string $seo_title
  * @property User $author
- * @property ThreadCategory $category
- * @property ThreadCommentary $commentaries
+ * @property ?ThreadCategory $category
+ * @property Collection<ThreadCommentary> $commentaries
  */
 class Thread extends Model
 {
@@ -71,5 +72,39 @@ class Thread extends Model
     public function commentaries(): MorphMany
     {
         return $this->morphMany(ThreadCommentary::class, 'commentable', 'commentable_type');
+    }
+
+    /**
+     * @return Collection
+     */
+    public function allCommentaries(): Collection
+    {
+        $this->load(['commentaries']);
+        $commentaries = collect();
+
+        /** @var ThreadCommentary $commentary */
+        foreach ($this->commentaries as $commentary) {
+
+            $commentaries = $this->getChildrenCommentaries($commentary, $commentaries);
+        }
+        return $commentaries->sortBy('created_at');
+    }
+
+    /**
+     * Рекурсивный метод для заполнения коллекции всеми комментариями принадлежащими треду
+     *
+     * @param \DvojkaT\Forumkit\Models\ThreadCommentary $commentary
+     * @param Collection $commentaries
+     * @return Collection
+     */
+    private function getChildrenCommentaries(ThreadCommentary $commentary, Collection $commentaries): Collection
+    {
+        $commentaries = $commentaries->push($commentary);
+        $commentary->load(['commentaries']);
+
+        foreach ($commentary->commentaries as $childrenCommentary) {
+            $commentaries = $this->getChildrenCommentaries($childrenCommentary, $commentaries);
+        }
+        return $commentaries;
     }
 }

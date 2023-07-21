@@ -7,6 +7,7 @@ use Dvojkat\Forumkit\Http\Requests\StoreThreadRequest;
 use Dvojkat\Forumkit\Http\Resources\ThreadFullResource;
 use Dvojkat\Forumkit\Http\Resources\ThreadShortResource;
 use DvojkaT\Forumkit\Models\ThreadCommentary;
+use Dvojkat\Forumkit\Services\Abstracts\ThreadCommentaryServiceInterface;
 use DvojkaT\Forumkit\Services\Abstracts\ThreadServiceInterface;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -17,10 +18,12 @@ use Illuminate\Support\Str;
 class ThreadController extends Controller
 {
     private ThreadServiceInterface $service;
+    private ThreadCommentaryServiceInterface $commentaryService;
 
-    public function __construct(ThreadServiceInterface $service)
+    public function __construct(ThreadServiceInterface $service, ThreadCommentaryServiceInterface $commentaryService)
     {
         $this->service = $service;
+        $this->commentaryService = $commentaryService;
     }
 
     /**
@@ -71,7 +74,9 @@ class ThreadController extends Controller
      */
     public function show(int $thread_id)
     {
-        return new ThreadFullResource($this->service->show($thread_id));
+        $thread = $this->service->show($thread_id);
+        $thread->commentaries = $this->commentaryService->transformCommentariesToHTML($thread->allCommentaries());
+        return new ThreadFullResource($thread);
     }
 
     /**

@@ -2,9 +2,11 @@
 
 namespace DvojkaT\Forumkit\Services\Abstracts;
 
+use App\Models\User;
+use Dvojkat\Forumkit\DTO\ThreadDTO;
 use Dvojkat\Forumkit\Models\Thread;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 interface ThreadServiceInterface
 {
@@ -40,4 +42,13 @@ interface ThreadServiceInterface
      * @return Thread
      */
     public function update(int $thread_id, array $attributes): Thread;
+
+    /**
+     * Преобразование Треда|коллекции тредов в дто с доп. значением ставил ли данный пользователь лайк
+     *
+     * @param Collection|Thread $object
+     * @param User $user
+     * @return Collection<ThreadDTO>|ThreadDTO
+     */
+    public function isLiked(Collection|Thread $object, User $user): Collection|ThreadDTO;
 }

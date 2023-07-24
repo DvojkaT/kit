@@ -3,16 +3,20 @@
 namespace DvojkaT\Forumkit\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use DvojkaT\Forumkit\Exceptions\ThreadNotFoundHttpException;
 use Dvojkat\Forumkit\Http\Requests\StoreThreadRequest;
+use Dvojkat\Forumkit\Http\Resources\ThreadDTOFullResource;
 use Dvojkat\Forumkit\Http\Resources\ThreadFullResource;
 use Dvojkat\Forumkit\Http\Resources\ThreadShortResource;
+use Dvojkat\Forumkit\Models\Thread;
 use Dvojkat\Forumkit\Services\Abstracts\ThreadCommentaryServiceInterface;
 use DvojkaT\Forumkit\Services\Abstracts\ThreadServiceInterface;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
 
 class ThreadController extends Controller
 {
@@ -69,13 +73,16 @@ class ThreadController extends Controller
      * Получение одного конкретного треда
      *
      * @param int $thread_id
-     * @return ThreadFullResource
+     * @return ThreadDTOFullResource
      */
     public function show(int $thread_id)
     {
         $thread = $this->service->show($thread_id);
-        $thread->commentaries = $this->commentaryService->transformCommentariesToHTML($thread->allCommentaries());
-        return new ThreadFullResource($thread);
+        $commentaries = $this->commentaryService->transformCommentariesToHTML($thread->allCommentaries());
+        $thread->commentaries = $this->commentaryService->checkForLike($commentaries, User::find(1)); //Todo: Auth::user()
+        $thread = $this->service->isLiked($thread, User::find(1)); // Todo: Auth::user()
+
+        return new ThreadDTOFullResource($thread);
     }
 
     /**

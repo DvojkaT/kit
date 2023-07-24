@@ -30,7 +30,8 @@ class ThreadFullResource extends JsonResource
             'content' => $this->content,
             'author' => $this->author->name,
             'category' => $this->category?->title,
-            'commentaries' => ThreadCommentaryResource::collection($this->commentaries)
+            'likes' => $this->likes->count(),
+            'commentaries' => ThreadCommentaryDTOResource::collection($this->commentaries)
         ];
     }
 }

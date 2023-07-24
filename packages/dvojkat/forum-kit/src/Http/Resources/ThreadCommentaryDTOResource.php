@@ -2,17 +2,16 @@
 
 namespace Dvojkat\Forumkit\Http\Resources;
 
-use DvojkaT\Forumkit\Models\ThreadCommentary;
+use Dvojkat\Forumkit\DTO\ThreadCommentaryDTO;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @mixin ThreadCommentary
+ * @mixin ThreadCommentaryDTO
  */
-class ThreadCommentaryResource extends JsonResource
+class ThreadCommentaryDTOResource extends JsonResource
 {
-
-    public function __construct(ThreadCommentary $resource)
+    public function __construct(ThreadCommentaryDTO $resource)
     {
         parent::__construct($resource);
     }
@@ -25,9 +24,10 @@ class ThreadCommentaryResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'text' => $this->text,
-            'likes' => $this->likes->count(),
+            'id' => $this->commentary->id,
+            'text' => $this->commentary->text,
+            'likes' => $this->commentary->likes->count(),
+            'is_liked' => $this->isLiked,
         ];
     }
 }

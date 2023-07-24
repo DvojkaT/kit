@@ -2,6 +2,7 @@
 
 namespace Dvojkat\Forumkit\Services\Abstracts;
 
+use App\Models\User;
 use DvojkaT\Forumkit\Models\ThreadCommentary;
 use Illuminate\Support\Collection;
 
@@ -38,4 +39,11 @@ interface ThreadCommentaryServiceInterface
      * @return Collection
      */
     public function transformCommentariesToHTML(Collection $commentaries): Collection;
+
+    /**
+     * @param Collection $commentaries
+     * @param User $user
+     * @return Collection
+     */
+    public function checkForLike(Collection $commentaries, User $user): Collection;
 }

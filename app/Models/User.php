@@ -2,6 +2,12 @@
 
 namespace App\Models;
 
+use Dvojkat\Forumkit\Models\Thread;
+use DvojkaT\Forumkit\Models\ThreadCommentary;
+use DvojkaT\Forumkit\Models\ThreadLike;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Collection;
 use Orchid\Filters\Types\Like;
 use Orchid\Filters\Types\Where;
 use Orchid\Filters\Types\WhereDateStartEnd;
@@ -9,6 +15,8 @@ use Orchid\Platform\Models\User as Authenticatable;
 
 /**
  * @property string $name
+ * @property Collection<ThreadLike> $threadsLikes
+ * @property Collection<ThreadLike> $commentariesLikes
  */
 class User extends Authenticatable
 {
@@ -70,4 +78,22 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    /**
+     * @return HasMany
+     */
+    public function threadsLikes(): HasMany
+    {
+        /** @phpstan-ignore-next-line  */
+        return $this->hasMany(ThreadLike::class, 'user_id', 'id')->where('likable_type', Thread::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function commentariesLikes(): HasMany
+    {
+        /** @phpstan-ignore-next-line */
+        return $this->hasMany(ThreadLike::class, 'user_id', 'id')->where('likable_type', ThreadCommentary::class);
+    }
 }

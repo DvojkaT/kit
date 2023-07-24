@@ -2,6 +2,8 @@
 
 namespace Dvojkat\Forumkit\Services;
 
+use App\Models\User;
+use Dvojkat\Forumkit\DTO\ThreadCommentaryDTO;
 use Dvojkat\Forumkit\Models\Thread;
 use DvojkaT\Forumkit\Models\ThreadCommentary;
 use Dvojkat\Forumkit\Repositories\Abstracts\ThreadCommentaryRepositoryInterface;
@@ -57,6 +59,22 @@ class ThreadCommentaryServiceEloquent implements ThreadCommentaryServiceInterfac
         return $commentaries->transform(function (ThreadCommentary $commentary) {
             $commentary->text = $this->commentaryParser($commentary->text);
             return $commentary;
+        });
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function checkForLike(Collection $commentaries, User $user): Collection
+    {
+        $likedComments = $user->commentariesLikes->pluck('likable_id');
+        return $commentaries->map(function (ThreadCommentary $commentary) use ($likedComments) {
+            if($likedComments->contains($commentary->id)) {
+                $isLiked = true;
+            } else {
+                $isLiked = false;
+            }
+            return new ThreadCommentaryDTO($commentary, $isLiked);
         });
     }
 

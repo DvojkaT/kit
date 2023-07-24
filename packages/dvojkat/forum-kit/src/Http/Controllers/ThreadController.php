@@ -3,17 +3,16 @@
 namespace DvojkaT\Forumkit\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use DvojkaT\Forumkit\Exceptions\ThreadNotFoundHttpException;
 use Dvojkat\Forumkit\Http\Requests\StoreThreadRequest;
 use Dvojkat\Forumkit\Http\Resources\ThreadFullResource;
 use Dvojkat\Forumkit\Http\Resources\ThreadShortResource;
-use DvojkaT\Forumkit\Models\ThreadCommentary;
 use Dvojkat\Forumkit\Services\Abstracts\ThreadCommentaryServiceInterface;
 use DvojkaT\Forumkit\Services\Abstracts\ThreadServiceInterface;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
-use Illuminate\Support\Str;
 
 class ThreadController extends Controller
 {
@@ -60,7 +59,7 @@ class ThreadController extends Controller
         try {
             $this->service->destroy($thread_id);
         } catch (\Exception $e) {
-            return \response('not found!', 409); //TODO: Изменить на exception
+            throw new ThreadNotFoundHttpException();
         }
 
         return response('deleted!', 200);

@@ -24,6 +24,7 @@ use DvojkaT\Forumkit\Models\ThreadCommentary;
  * @property User $author
  * @property ?ThreadCategory $category
  * @property Collection<ThreadCommentary> $commentaries
+ * @property Collection<ThreadLike> $likes
  */
 class Thread extends Model
 {
@@ -67,11 +68,23 @@ class Thread extends Model
     }
 
     /**
+     * Комментарии привязанные к треду
+     *
      * @return MorphMany
      */
     public function commentaries(): MorphMany
     {
         return $this->morphMany(ThreadCommentary::class, 'commentable', 'commentable_type');
+    }
+
+    /**
+     * Лайки привязанные к треду
+     *
+     * @return MorphMany
+     */
+    public function likes(): MorphMany
+    {
+        return $this->morphMany(ThreadLike::class, 'likable', 'likable_type');
     }
 
     /**

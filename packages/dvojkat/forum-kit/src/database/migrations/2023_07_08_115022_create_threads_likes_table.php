@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('thread_likes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->comment('id пользователя поставившего лайк');
+            $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
             $table->morphs('likable');
             $table->timestamps();
         });

@@ -13,6 +13,7 @@ use Illuminate\Support\Collection;
  * @property string $commentable_type
  * @property int $commentable_id
  * @property Collection<ThreadCommentary> $commentaries
+ * @property Collection<ThreadLike> $likes
  */
 class ThreadCommentary extends Model
 {
@@ -34,10 +35,17 @@ class ThreadCommentary extends Model
     }
 
     /**
+     * Комментарии привязанные к данному комментарию
+     *
      * @return MorphMany
      */
     public function commentaries(): MorphMany
     {
         return $this->morphMany(ThreadCommentary::class, 'commentable', 'commentable_type', 'commentable_id', 'id');
+    }
+
+    public function likes(): MorphMany
+    {
+        return $this->morphMany(ThreadLike::class, 'likable', 'likable_type');
     }
 }

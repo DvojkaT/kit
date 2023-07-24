@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->morphs('commentable');
             $table->text('text')->nullable();
+            $table->unsignedBigInteger('image_id');
+            $table->foreign('image_id')->on('attachments')->references('id')->onDelete('set null');
             $table->timestamps();
         });
     }

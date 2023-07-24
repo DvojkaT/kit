@@ -6,8 +6,9 @@ use Dvojkat\Forumkit\Models\Thread;
 use DvojkaT\Forumkit\Models\ThreadCommentary;
 use DvojkaT\Forumkit\Models\ThreadLike;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
+use Laravel\Passport\HasApiTokens;
 use Orchid\Filters\Types\Like;
 use Orchid\Filters\Types\Where;
 use Orchid\Filters\Types\WhereDateStartEnd;
@@ -20,6 +21,7 @@ use Orchid\Platform\Models\User as Authenticatable;
  */
 class User extends Authenticatable
 {
+    use Notifiable, HasApiTokens;
     /**
      * The attributes that are mass assignable.
      *

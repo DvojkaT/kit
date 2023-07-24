@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use DvojkaT\Forumkit\Models\ThreadCategory;
 use DvojkaT\Forumkit\Models\ThreadCommentary;
+use Orchid\Attachment\Models\Attachment;
 
 /**
  * @property int $id
@@ -85,6 +87,26 @@ class Thread extends Model
     public function likes(): MorphMany
     {
         return $this->morphMany(ThreadLike::class, 'likable', 'likable_type');
+    }
+
+    /**
+     * Получение привязанной картинки
+     *
+     * @return HasOne
+     */
+    public function image(): HasOne
+    {
+        return $this->hasOne(Attachment::class, 'id', 'image_id');
+    }
+
+    /**
+     * Привязанные файлы
+     *
+     * @return MorphToMany
+     */
+    public function files(): MorphToMany
+    {
+        return $this->attachment('files');
     }
 
     /**

@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
+use Orchid\Attachment\Attachable;
+use Orchid\Attachment\Models\Attachment;
 
 /**
  * @property int $id
@@ -15,12 +18,15 @@ use Illuminate\Support\Collection;
  * @property string $commentable_type
  * @property int $commentable_id
  * @property int $user_id
+ * @property int $image_id
  * @property Collection<ThreadCommentary> $commentaries
  * @property Collection<ThreadLike> $likes
  * @property User $author
+ * @property Attachment $image
  */
 class ThreadCommentary extends Model
 {
+    use Attachable;
     /**
      * @var string[]
      */
@@ -28,7 +34,8 @@ class ThreadCommentary extends Model
         'commentable_type',
         'commentable_id',
         'text',
-        'user_id'
+        'user_id',
+        'image_id'
     ];
 
     /**
@@ -49,13 +56,43 @@ class ThreadCommentary extends Model
         return $this->morphMany(ThreadCommentary::class, 'commentable', 'commentable_type', 'commentable_id', 'id');
     }
 
+    /**
+     * Получение лайков данного комментария
+     *
+     * @return MorphMany
+     */
     public function likes(): MorphMany
     {
         return $this->morphMany(ThreadLike::class, 'likable', 'likable_type');
     }
 
+    /**
+     * Получение автора
+     *
+     * @return HasOne
+     */
     public function author(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    /**
+     * Получение привязанной картинки
+     *
+     * @return HasOne
+     */
+    public function image(): HasOne
+    {
+        return $this->hasOne(Attachment::class, 'id', 'image_id');
+    }
+
+    /**
+     * Получение файлов
+     *
+     * @return MorphToMany
+     */
+    public function files(): MorphToMany
+    {
+        return $this->attachment('files');
     }
 }

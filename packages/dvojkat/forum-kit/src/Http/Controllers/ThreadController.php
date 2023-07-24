@@ -17,6 +17,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class ThreadController extends Controller
 {
@@ -77,10 +78,11 @@ class ThreadController extends Controller
      */
     public function show(int $thread_id)
     {
+        $user = Auth::user();
         $thread = $this->service->show($thread_id);
         $commentaries = $this->commentaryService->transformCommentariesToHTML($thread->allCommentaries());
-        $thread->commentaries = $this->commentaryService->checkForLike($commentaries, User::find(1)); //Todo: Auth::user()
-        $thread = $this->service->isLiked($thread, User::find(1)); // Todo: Auth::user()
+        $thread->commentaries = $this->commentaryService->checkForLike($commentaries, $user);
+        $thread = $this->service->isLiked($thread, $user);
 
         return new ThreadDTOFullResource($thread);
     }

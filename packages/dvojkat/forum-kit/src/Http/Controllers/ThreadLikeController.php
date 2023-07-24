@@ -5,8 +5,8 @@ namespace Dvojkat\Forumkit\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Dvojkat\Forumkit\Http\Resources\ThreadCommentaryResource;
 use Dvojkat\Forumkit\Http\Resources\ThreadShortResource;
-use DvojkaT\Forumkit\Models\ThreadCommentary;
 use Dvojkat\Forumkit\Services\Abstracts\ThreadLikeServiceInterface;
+use Illuminate\Support\Facades\Auth;
 
 class ThreadLikeController extends Controller
 {
@@ -25,7 +25,7 @@ class ThreadLikeController extends Controller
      */
     public function setLikeToThread(int $thread_id)
     {
-        $thread = $this->service->setLikeToThread($thread_id, 1); //Todo: Auth::id();
+        $thread = $this->service->setLikeToThread($thread_id, Auth::id());
         return new ThreadShortResource($thread);
     }
 
@@ -37,7 +37,7 @@ class ThreadLikeController extends Controller
      */
     public function setLikeToCommentary(int $commentary_id)
     {
-        $commentary = $this->service->setLikeToCommentary($commentary_id, 1); //Todo: Auth::id()
+        $commentary = $this->service->setLikeToCommentary($commentary_id, Auth::id());
         return new ThreadCommentaryResource($commentary);
     }
 
@@ -49,7 +49,7 @@ class ThreadLikeController extends Controller
      */
     public function unsetThreadLike(int $thread_id)
     {
-        $thread = $this->service->unsetThreadLike($thread_id, 1); //Todo: Auth::id()
+        $thread = $this->service->unsetThreadLike($thread_id, Auth::id());
         return new ThreadShortResource($thread);
     }
 
@@ -61,7 +61,7 @@ class ThreadLikeController extends Controller
      */
     public function unsetCommentaryLike(int $commentary_id)
     {
-        $commentary = $this->service->unsetCommentaryLike($commentary_id, 1); //Todo: Auth::id()
+        $commentary = $this->service->unsetCommentaryLike($commentary_id, Auth::id());
         return new ThreadCommentaryResource($commentary);
     }
 }

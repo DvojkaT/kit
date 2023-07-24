@@ -32,7 +32,7 @@ class ThreadLikeServiceEloquent implements ThreadLikeServiceInterface
     {
         $thread = $this->threadRepository->with(['likes'])->find($thread_id);
 
-        if ($thread->likes->where('user_id')->count() > 0) {
+        if ($thread->likes->where('user_id', $user_id)->count() > 0) {
             throw new LikeAlreadyExistsHttpException();
         }
 
@@ -48,7 +48,7 @@ class ThreadLikeServiceEloquent implements ThreadLikeServiceInterface
     {
         $commentary = $this->threadCommentaryRepository->with(['likes'])->find($commentary_id);
 
-        if ($commentary->likes->where('user_id')->count() > 0) {
+        if ($commentary->likes->where('user_id', $user_id)->count() > 0) {
             throw new LikeAlreadyExistsHttpException();
         }
 
@@ -64,7 +64,7 @@ class ThreadLikeServiceEloquent implements ThreadLikeServiceInterface
     {
         $thread = $this->threadRepository->with(['likes'])->find($thread_id);
 
-        if ($thread->likes->where('user_id')->count() == 0) {
+        if ($thread->likes->where('user_id', $user_id)->count() == 0) {
             throw new LikeDoNotExistHttpException();
         }
 
@@ -80,7 +80,7 @@ class ThreadLikeServiceEloquent implements ThreadLikeServiceInterface
     {
         $commentary = $this->threadCommentaryRepository->with(['likes'])->find($commentary_id);
 
-        if($commentary->likes->where('user_id')->count() == 0) {
+        if($commentary->likes->where('user_id', $user_id)->count() == 0) {
             throw new LikeDoNotExistHttpException();
         }
 

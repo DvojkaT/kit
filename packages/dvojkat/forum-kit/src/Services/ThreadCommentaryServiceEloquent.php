@@ -6,40 +6,55 @@ use App\Models\User;
 use Dvojkat\Forumkit\DTO\ThreadCommentaryDTO;
 use Dvojkat\Forumkit\Models\Thread;
 use DvojkaT\Forumkit\Models\ThreadCommentary;
+use Dvojkat\Forumkit\Notifications\NewCommentaryOrLikeNotification;
 use Dvojkat\Forumkit\Repositories\Abstracts\ThreadCommentaryRepositoryInterface;
+use DvojkaT\Forumkit\Repositories\Abstracts\ThreadRepositoryInterface;
 use Dvojkat\Forumkit\Services\Abstracts\ThreadCommentaryServiceInterface;
 use Illuminate\Support\Collection;
 
 class ThreadCommentaryServiceEloquent implements ThreadCommentaryServiceInterface
 {
     private ThreadCommentaryRepositoryInterface $repository;
+    private ThreadRepositoryInterface $threadRepository;
 
-    public function __construct(ThreadCommentaryRepositoryInterface $repository)
+    public function __construct(
+        ThreadCommentaryRepositoryInterface $repository,
+        ThreadRepositoryInterface $threadRepository
+    )
     {
         $this->repository = $repository;
+        $this->threadRepository = $threadRepository;
     }
 
     /**
      * @inheritDoc
      */
-    public function storeForThread(array $fields): ThreadCommentary
+    public function storeForThread(array $fields, int $user_id): ThreadCommentary
     {
+        $thread = $this->threadRepository->find($fields['thread_id']);
+        $thread->author->notify(new NewCommentaryOrLikeNotification(ThreadCommentary::class, Thread::class, $fields['thread_id']));
+
         return $this->repository->create([
             'text' => $fields['text'],
             'commentable_id' => $fields['thread_id'],
-            'commentable_type' => Thread::class
+            'commentable_type' => Thread::class,
+            'user_id' => $user_id
         ]);
     }
 
     /**
      * @inheritDoc
      */
-    public function storeForCommentary(array $fields): ThreadCommentary
+    public function storeForCommentary(array $fields, int $user_id): ThreadCommentary
     {
+        $commentary = $this->repository->find($fields['commentary_id']);
+        $commentary->author->notify(new NewCommentaryOrLikeNotification(ThreadCommentary::class, ThreadCommentary::class, $fields['commentary_id']));
+
         return $this->repository->create([
             'text' => $fields['text'],
             'commentable_id' => $fields['commentary_id'],
-            'commentable_type' => ThreadCommentary::class
+            'commentable_type' => ThreadCommentary::class,
+            'user_id' => $user_id
         ]);
     }
 

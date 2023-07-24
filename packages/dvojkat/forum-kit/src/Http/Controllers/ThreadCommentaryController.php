@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Dvojkat\Forumkit\Http\Requests\StoreThreadCommentaryForCommentaryRequest;
 use Dvojkat\Forumkit\Http\Requests\StoreThreadCommentaryForThreadRequest;
 use Dvojkat\Forumkit\Http\Resources\ThreadCommentaryResource;
-use Dvojkat\Forumkit\Models\Thread;
 use DvojkaT\Forumkit\Models\ThreadCommentary;
 use Dvojkat\Forumkit\Services\Abstracts\ThreadCommentaryServiceInterface;
+use Illuminate\Support\Facades\Auth;
 
 class ThreadCommentaryController extends Controller
 {
@@ -27,7 +27,7 @@ class ThreadCommentaryController extends Controller
      */
     public function storeForThread(StoreThreadCommentaryForThreadRequest $request): ThreadCommentaryResource
     {
-        return new ThreadCommentaryResource($this->service->storeForThread($request->validated()));
+        return new ThreadCommentaryResource($this->service->storeForThread($request->validated(), Auth::id()));
     }
 
     /**
@@ -38,7 +38,7 @@ class ThreadCommentaryController extends Controller
      */
     public function storeForCommentary(StoreThreadCommentaryForCommentaryRequest $request): ThreadCommentaryResource
     {
-        return new ThreadCommentaryResource($this->service->storeForCommentary($request->validated()));
+        return new ThreadCommentaryResource($this->service->storeForCommentary($request->validated(), Auth::id()));
     }
 
     /**

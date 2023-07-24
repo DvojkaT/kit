@@ -12,17 +12,19 @@ interface ThreadCommentaryServiceInterface
      * Создание комментария к треду
      *
      * @param array<string, string> $fields
+     * @param int $user_id
      * @return ThreadCommentary
      */
-    public function storeForThread(array $fields): ThreadCommentary;
+    public function storeForThread(array $fields, int $user_id): ThreadCommentary;
 
     /**
      * Создание комментария к комментарию
      *
      * @param array<string, string> $fields
+     * @param int $user_id
      * @return ThreadCommentary
      */
-    public function storeForCommentary(array $fields): ThreadCommentary;
+    public function storeForCommentary(array $fields, int $user_id): ThreadCommentary;
 
     /**
      * Получение комментария по id

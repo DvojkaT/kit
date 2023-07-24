@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('thread_commentaries', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->comment('Автор комментария');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->morphs('commentable');
             $table->text('text')->nullable();
             $table->timestamps();

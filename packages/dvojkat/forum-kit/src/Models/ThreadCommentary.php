@@ -2,7 +2,9 @@
 
 namespace DvojkaT\Forumkit\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Collection;
@@ -12,8 +14,10 @@ use Illuminate\Support\Collection;
  * @property string $text
  * @property string $commentable_type
  * @property int $commentable_id
+ * @property int $user_id
  * @property Collection<ThreadCommentary> $commentaries
  * @property Collection<ThreadLike> $likes
+ * @property User $author
  */
 class ThreadCommentary extends Model
 {
@@ -23,7 +27,8 @@ class ThreadCommentary extends Model
     protected $fillable = [
         'commentable_type',
         'commentable_id',
-        'text'
+        'text',
+        'user_id'
     ];
 
     /**
@@ -47,5 +52,10 @@ class ThreadCommentary extends Model
     public function likes(): MorphMany
     {
         return $this->morphMany(ThreadLike::class, 'likable', 'likable_type');
+    }
+
+    public function author(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }

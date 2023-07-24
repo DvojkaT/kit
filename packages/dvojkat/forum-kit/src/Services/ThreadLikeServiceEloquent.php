@@ -6,6 +6,8 @@ use Dvojkat\Forumkit\Exceptions\LikeAlreadyExistsHttpException;
 use Dvojkat\Forumkit\Exceptions\LikeDoNotExistHttpException;
 use Dvojkat\Forumkit\Models\Thread;
 use DvojkaT\Forumkit\Models\ThreadCommentary;
+use DvojkaT\Forumkit\Models\ThreadLike;
+use Dvojkat\Forumkit\Notifications\NewCommentaryOrLikeNotification;
 use Dvojkat\Forumkit\Repositories\Abstracts\ThreadCommentaryRepositoryInterface;
 use DvojkaT\Forumkit\Repositories\Abstracts\ThreadRepositoryInterface;
 use Dvojkat\Forumkit\Services\Abstracts\ThreadLikeServiceInterface;
@@ -36,6 +38,8 @@ class ThreadLikeServiceEloquent implements ThreadLikeServiceInterface
             throw new LikeAlreadyExistsHttpException();
         }
 
+        $thread->author->notify(new NewCommentaryOrLikeNotification(ThreadLike::class, Thread::class, $thread_id));
+
         $thread->likes()->create(['user_id' => $user_id]);
 
         return $thread;
@@ -51,6 +55,8 @@ class ThreadLikeServiceEloquent implements ThreadLikeServiceInterface
         if ($commentary->likes->where('user_id', $user_id)->count() > 0) {
             throw new LikeAlreadyExistsHttpException();
         }
+
+        $commentary->author->notify(new NewCommentaryOrLikeNotification(ThreadLike::class, ThreadCommentary::class, $commentary_id));
 
         $commentary->likes()->create(['user_id' => $user_id]);
 

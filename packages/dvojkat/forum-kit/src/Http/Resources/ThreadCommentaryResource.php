@@ -27,7 +27,6 @@ class ThreadCommentaryResource extends JsonResource
         return [
             'id' => $this->id,
             'text' => $this->text,
-            'likes' => $this->likes->count(),
         ];
     }
 }

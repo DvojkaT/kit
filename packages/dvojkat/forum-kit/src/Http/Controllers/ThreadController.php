@@ -49,7 +49,7 @@ class ThreadController extends Controller
     public function store(StoreThreadRequest $request)
     {
         $data = $request->validated();
-        $data['author_id'] = 1; //TODO: Auth::id();
+        $data['author_id'] = Auth::id();
         return new ThreadFullResource($this->service->store($data));
     }
 
@@ -78,6 +78,7 @@ class ThreadController extends Controller
      */
     public function show(int $thread_id)
     {
+        /** @var User $user */
         $user = Auth::user();
         $thread = $this->service->show($thread_id);
         $commentaries = $this->commentaryService->transformCommentariesToHTML($thread->allCommentaries());

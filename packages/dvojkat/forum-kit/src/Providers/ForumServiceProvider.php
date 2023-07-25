@@ -22,7 +22,5 @@ class ForumServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/migrations/' => database_path('migrations')
         ], 'forum-kit-migrations');
-
-        $this->loadRoutesFrom(__DIR__.'/../routes/api.php'); //Todo:: выпилить и перенести в основной проект
     }
 }

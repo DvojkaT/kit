@@ -1,0 +1,6 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Match expression does not handle remaining value\\: string$#"
+			count: 3
+			path: packages/dvojkat/forum-kit/src/Notifications/NewCommentaryOrLikeNotification.php

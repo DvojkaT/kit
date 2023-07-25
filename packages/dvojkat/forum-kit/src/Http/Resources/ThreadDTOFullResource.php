@@ -1,8 +1,8 @@
 <?php
 
-namespace Dvojkat\Forumkit\Http\Resources;
+namespace DvojkaT\Forumkit\Http\Resources;
 
-use Dvojkat\Forumkit\DTO\ThreadDTO;
+use DvojkaT\Forumkit\DTO\ThreadDTO;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 

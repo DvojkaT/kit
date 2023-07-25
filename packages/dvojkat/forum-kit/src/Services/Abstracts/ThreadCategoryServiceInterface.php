@@ -1,6 +1,6 @@
 <?php
 
-namespace Dvojkat\Forumkit\Services\Abstracts;
+namespace DvojkaT\Forumkit\Services\Abstracts;
 
 use DvojkaT\Forumkit\Models\ThreadCategory;
 use Illuminate\Database\Eloquent\Collection;

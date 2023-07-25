@@ -1,6 +1,6 @@
 <?php
 
-namespace Dvojkat\Forumkit\database\seeders;
+namespace DvojkaT\Forumkit\database\seeders;
 
 use DvojkaT\Forumkit\Models\ThreadCategory;
 use Illuminate\Database\Seeder;

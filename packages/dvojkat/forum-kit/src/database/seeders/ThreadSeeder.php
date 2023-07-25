@@ -1,8 +1,8 @@
 <?php
 
-namespace Dvojkat\Forumkit\database\seeders;
+namespace DvojkaT\Forumkit\database\seeders;
 
-use Dvojkat\Forumkit\Models\Thread;
+use DvojkaT\Forumkit\Models\Thread;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 

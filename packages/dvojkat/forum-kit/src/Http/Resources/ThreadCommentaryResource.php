@@ -1,6 +1,6 @@
 <?php
 
-namespace Dvojkat\Forumkit\Http\Resources;
+namespace DvojkaT\Forumkit\Http\Resources;
 
 use DvojkaT\Forumkit\Models\ThreadCommentary;
 use Illuminate\Http\Request;

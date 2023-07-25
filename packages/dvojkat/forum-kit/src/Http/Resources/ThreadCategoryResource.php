@@ -1,8 +1,8 @@
 <?php
 
-namespace Dvojkat\Forumkit\Http\Resources;
+namespace DvojkaT\Forumkit\Http\Resources;
 
-use Dvojkat\Forumkit\Models\Thread;
+use DvojkaT\Forumkit\Models\Thread;
 use DvojkaT\Forumkit\Models\ThreadCategory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;

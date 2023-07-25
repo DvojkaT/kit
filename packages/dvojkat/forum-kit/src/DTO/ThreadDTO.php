@@ -1,8 +1,8 @@
 <?php
 
-namespace Dvojkat\Forumkit\DTO;
+namespace DvojkaT\Forumkit\DTO;
 
-use Dvojkat\Forumkit\Models\Thread;
+use DvojkaT\Forumkit\Models\Thread;
 
 /**
  * @property Thread $thread

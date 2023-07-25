@@ -1,6 +1,6 @@
 <?php
 
-namespace Dvojkat\Forumkit\Http\Requests;
+namespace DvojkaT\Forumkit\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,7 +22,7 @@ class GetThreadsByCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_id' => 'required|integer|exists:Dvojkat\Forumkit\Models\ThreadCategory,id'
+            'category_id' => 'required|integer|exists:DvojkaT\Forumkit\Models\ThreadCategory,id'
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dvojkat\Forumkit\Services\Abstracts;
+namespace DvojkaT\Forumkit\Services\Abstracts;
 
 use App\Models\User;
 use DvojkaT\Forumkit\Models\ThreadCommentary;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dvojkat\Forumkit\Models;
+namespace DvojkaT\Forumkit\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +12,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use DvojkaT\Forumkit\Models\ThreadCategory;
 use DvojkaT\Forumkit\Models\ThreadCommentary;
+use DvojkaT\Forumkit\Models\ThreadLike;
+use Orchid\Attachment\Attachable;
 use Orchid\Attachment\Models\Attachment;
 
 /**
@@ -30,6 +32,7 @@ use Orchid\Attachment\Models\Attachment;
  */
 class Thread extends Model
 {
+    use Attachable;
     protected static function boot(): void
     {
         parent::boot();

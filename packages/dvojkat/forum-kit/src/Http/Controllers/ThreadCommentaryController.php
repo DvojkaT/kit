@@ -1,13 +1,13 @@
 <?php
 
-namespace Dvojkat\Forumkit\Http\Controllers;
+namespace DvojkaT\Forumkit\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Dvojkat\Forumkit\Http\Requests\StoreThreadCommentaryForCommentaryRequest;
-use Dvojkat\Forumkit\Http\Requests\StoreThreadCommentaryForThreadRequest;
-use Dvojkat\Forumkit\Http\Resources\ThreadCommentaryResource;
+use DvojkaT\Forumkit\Http\Requests\StoreThreadCommentaryForCommentaryRequest;
+use DvojkaT\Forumkit\Http\Requests\StoreThreadCommentaryForThreadRequest;
+use DvojkaT\Forumkit\Http\Resources\ThreadCommentaryResource;
 use DvojkaT\Forumkit\Models\ThreadCommentary;
-use Dvojkat\Forumkit\Services\Abstracts\ThreadCommentaryServiceInterface;
+use DvojkaT\Forumkit\Services\Abstracts\ThreadCommentaryServiceInterface;
 use Illuminate\Support\Facades\Auth;
 
 class ThreadCommentaryController extends Controller

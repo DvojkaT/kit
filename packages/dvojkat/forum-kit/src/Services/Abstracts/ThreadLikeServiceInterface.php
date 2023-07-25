@@ -1,10 +1,10 @@
 <?php
 
-namespace Dvojkat\Forumkit\Services\Abstracts;
+namespace DvojkaT\Forumkit\Services\Abstracts;
 
-use Dvojkat\Forumkit\Exceptions\LikeAlreadyExistsHttpException;
-use Dvojkat\Forumkit\Exceptions\LikeDoNotExistHttpException;
-use Dvojkat\Forumkit\Models\Thread;
+use DvojkaT\Forumkit\Exceptions\LikeAlreadyExistsHttpException;
+use DvojkaT\Forumkit\Exceptions\LikeDoNotExistHttpException;
+use DvojkaT\Forumkit\Models\Thread;
 use DvojkaT\Forumkit\Models\ThreadCommentary;
 
 interface ThreadLikeServiceInterface

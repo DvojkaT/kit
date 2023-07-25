@@ -2,13 +2,13 @@
 
 namespace DvojkaT\Forumkit\Providers;
 
-use Dvojkat\Forumkit\Services\Abstracts\ThreadCategoryServiceInterface;
-use Dvojkat\Forumkit\Services\Abstracts\ThreadCommentaryServiceInterface;
-use Dvojkat\Forumkit\Services\Abstracts\ThreadLikeServiceInterface;
+use DvojkaT\Forumkit\Services\Abstracts\ThreadCategoryServiceInterface;
+use DvojkaT\Forumkit\Services\Abstracts\ThreadCommentaryServiceInterface;
+use DvojkaT\Forumkit\Services\Abstracts\ThreadLikeServiceInterface;
 use DvojkaT\Forumkit\Services\Abstracts\ThreadServiceInterface;
-use Dvojkat\Forumkit\Services\ThreadCategoryServiceEloquent;
-use Dvojkat\Forumkit\Services\ThreadCommentaryServiceEloquent;
-use Dvojkat\Forumkit\Services\ThreadLikeServiceEloquent;
+use DvojkaT\Forumkit\Services\ThreadCategoryServiceEloquent;
+use DvojkaT\Forumkit\Services\ThreadCommentaryServiceEloquent;
+use DvojkaT\Forumkit\Services\ThreadLikeServiceEloquent;
 use DvojkaT\Forumkit\Services\ThreadServiceEloquent;
 use Illuminate\Support\ServiceProvider;
 

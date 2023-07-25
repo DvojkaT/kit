@@ -2,7 +2,7 @@
 
 namespace DvojkaT\Forumkit\database\factories;
 
-use Dvojkat\Forumkit\Models\Thread;
+use DvojkaT\Forumkit\Models\Thread;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 

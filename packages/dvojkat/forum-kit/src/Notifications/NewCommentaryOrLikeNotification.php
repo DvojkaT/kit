@@ -1,8 +1,8 @@
 <?php
 
-namespace Dvojkat\Forumkit\Notifications;
+namespace DvojkaT\Forumkit\Notifications;
 
-use Dvojkat\Forumkit\Models\Thread;
+use DvojkaT\Forumkit\Models\Thread;
 use DvojkaT\Forumkit\Models\ThreadCommentary;
 use DvojkaT\Forumkit\Models\ThreadLike;
 use Illuminate\Bus\Queueable;

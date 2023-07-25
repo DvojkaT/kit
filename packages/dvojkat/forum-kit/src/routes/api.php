@@ -1,7 +1,7 @@
 <?php
 
 use DvojkaT\Forumkit\Http\Controllers\ThreadCategoryController;
-use Dvojkat\Forumkit\Http\Controllers\ThreadCommentaryController;
+use DvojkaT\Forumkit\Http\Controllers\ThreadCommentaryController;
 use DvojkaT\Forumkit\Http\Controllers\ThreadController;
 use DvojkaT\Forumkit\Http\Controllers\ThreadLikeController;
 use Illuminate\Support\Facades\Route;

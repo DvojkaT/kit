@@ -1,9 +1,9 @@
 <?php
 
-namespace Dvojkat\Forumkit\Repositories;
+namespace DvojkaT\Forumkit\Repositories;
 
 use DvojkaT\Forumkit\Models\ThreadCommentary;
-use Dvojkat\Forumkit\Repositories\Abstracts\ThreadCommentaryRepositoryInterface;
+use DvojkaT\Forumkit\Repositories\Abstracts\ThreadCommentaryRepositoryInterface;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 class ThreadCommentaryRepositoryEloquent extends BaseRepository implements ThreadCommentaryRepositoryInterface

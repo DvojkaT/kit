@@ -1,6 +1,6 @@
 <?php
 
-namespace Dvojkat\Forumkit\Http\Requests;
+namespace DvojkaT\Forumkit\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,7 +23,7 @@ class StoreThreadCommentaryForCommentaryRequest extends FormRequest
     {
         return [
             'text' => 'required|string',
-            'commentary_id' => 'required|integer|exists:Dvojkat\Forumkit\Models\ThreadCommentary,id'
+            'commentary_id' => 'required|integer|exists:DvojkaT\Forumkit\Models\ThreadCommentary,id'
         ];
     }
 }

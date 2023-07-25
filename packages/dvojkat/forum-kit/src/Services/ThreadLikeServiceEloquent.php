@@ -1,16 +1,16 @@
 <?php
 
-namespace Dvojkat\Forumkit\Services;
+namespace DvojkaT\Forumkit\Services;
 
-use Dvojkat\Forumkit\Exceptions\LikeAlreadyExistsHttpException;
-use Dvojkat\Forumkit\Exceptions\LikeDoNotExistHttpException;
-use Dvojkat\Forumkit\Models\Thread;
+use DvojkaT\Forumkit\Exceptions\LikeAlreadyExistsHttpException;
+use DvojkaT\Forumkit\Exceptions\LikeDoNotExistHttpException;
+use DvojkaT\Forumkit\Models\Thread;
 use DvojkaT\Forumkit\Models\ThreadCommentary;
 use DvojkaT\Forumkit\Models\ThreadLike;
-use Dvojkat\Forumkit\Notifications\NewCommentaryOrLikeNotification;
-use Dvojkat\Forumkit\Repositories\Abstracts\ThreadCommentaryRepositoryInterface;
+use DvojkaT\Forumkit\Notifications\NewCommentaryOrLikeNotification;
+use DvojkaT\Forumkit\Repositories\Abstracts\ThreadCommentaryRepositoryInterface;
 use DvojkaT\Forumkit\Repositories\Abstracts\ThreadRepositoryInterface;
-use Dvojkat\Forumkit\Services\Abstracts\ThreadLikeServiceInterface;
+use DvojkaT\Forumkit\Services\Abstracts\ThreadLikeServiceInterface;
 
 class ThreadLikeServiceEloquent implements ThreadLikeServiceInterface
 {

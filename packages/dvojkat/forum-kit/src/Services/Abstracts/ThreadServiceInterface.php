@@ -3,8 +3,8 @@
 namespace DvojkaT\Forumkit\Services\Abstracts;
 
 use App\Models\User;
-use Dvojkat\Forumkit\DTO\ThreadDTO;
-use Dvojkat\Forumkit\Models\Thread;
+use DvojkaT\Forumkit\DTO\ThreadDTO;
+use DvojkaT\Forumkit\Models\Thread;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 

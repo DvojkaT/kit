@@ -1,9 +1,9 @@
 <?php
 
-namespace Dvojkat\Forumkit\Services;
+namespace DvojkaT\Forumkit\Services;
 
-use Dvojkat\Forumkit\Repositories\Abstracts\ThreadCategoryRepositoryInterface;
-use Dvojkat\Forumkit\Services\Abstracts\ThreadCategoryServiceInterface;
+use DvojkaT\Forumkit\Repositories\Abstracts\ThreadCategoryRepositoryInterface;
+use DvojkaT\Forumkit\Services\Abstracts\ThreadCategoryServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 class ThreadCategoryServiceEloquent implements ThreadCategoryServiceInterface

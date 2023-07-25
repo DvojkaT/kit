@@ -1,6 +1,6 @@
 <?php
 
-namespace Dvojkat\Forumkit\Exceptions;
+namespace DvojkaT\Forumkit\Exceptions;
 
 class LikeDoNotExistHttpException extends BaseHttpException
 {

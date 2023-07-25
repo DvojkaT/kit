@@ -2,7 +2,7 @@
 
 namespace DvojkaT\Forumkit\Repositories;
 
-use Dvojkat\Forumkit\Models\Thread;
+use DvojkaT\Forumkit\Models\Thread;
 use DvojkaT\Forumkit\Repositories\Abstracts\ThreadRepositoryInterface;
 use Prettus\Repository\Eloquent\BaseRepository;
 

@@ -3,8 +3,8 @@
 namespace DvojkaT\Forumkit\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Dvojkat\Forumkit\Http\Resources\ThreadCategoryResource;
-use Dvojkat\Forumkit\Services\Abstracts\ThreadCategoryServiceInterface;
+use DvojkaT\Forumkit\Http\Resources\ThreadCategoryResource;
+use DvojkaT\Forumkit\Services\Abstracts\ThreadCategoryServiceInterface;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ThreadCategoryController extends Controller

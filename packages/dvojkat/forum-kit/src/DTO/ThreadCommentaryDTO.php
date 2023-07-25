@@ -1,6 +1,6 @@
 <?php
 
-namespace Dvojkat\Forumkit\DTO;
+namespace DvojkaT\Forumkit\DTO;
 
 use DvojkaT\Forumkit\Models\ThreadCommentary;
 

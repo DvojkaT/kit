@@ -1,11 +1,11 @@
 <?php
 
-namespace Dvojkat\Forumkit\Http\Controllers;
+namespace DvojkaT\Forumkit\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Dvojkat\Forumkit\Http\Resources\ThreadCommentaryResource;
-use Dvojkat\Forumkit\Http\Resources\ThreadShortResource;
-use Dvojkat\Forumkit\Services\Abstracts\ThreadLikeServiceInterface;
+use DvojkaT\Forumkit\Http\Resources\ThreadCommentaryResource;
+use DvojkaT\Forumkit\Http\Resources\ThreadShortResource;
+use DvojkaT\Forumkit\Services\Abstracts\ThreadLikeServiceInterface;
 use Illuminate\Support\Facades\Auth;
 
 class ThreadLikeController extends Controller

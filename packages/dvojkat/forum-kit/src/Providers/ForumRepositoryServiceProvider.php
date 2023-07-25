@@ -2,11 +2,11 @@
 
 namespace DvojkaT\Forumkit\Providers;
 
-use Dvojkat\Forumkit\Repositories\Abstracts\ThreadCategoryRepositoryInterface;
-use Dvojkat\Forumkit\Repositories\Abstracts\ThreadCommentaryRepositoryInterface;
+use DvojkaT\Forumkit\Repositories\Abstracts\ThreadCategoryRepositoryInterface;
+use DvojkaT\Forumkit\Repositories\Abstracts\ThreadCommentaryRepositoryInterface;
 use DvojkaT\Forumkit\Repositories\Abstracts\ThreadRepositoryInterface;
-use Dvojkat\Forumkit\Repositories\ThreadCategoryRepositoryEloquent;
-use Dvojkat\Forumkit\Repositories\ThreadCommentaryRepositoryEloquent;
+use DvojkaT\Forumkit\Repositories\ThreadCategoryRepositoryEloquent;
+use DvojkaT\Forumkit\Repositories\ThreadCommentaryRepositoryEloquent;
 use DvojkaT\Forumkit\Repositories\ThreadRepositoryEloquent;
 use Illuminate\Support\ServiceProvider;
 

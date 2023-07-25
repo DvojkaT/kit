@@ -1,15 +1,15 @@
 <?php
 
-namespace Dvojkat\Forumkit\Services;
+namespace DvojkaT\Forumkit\Services;
 
 use App\Models\User;
-use Dvojkat\Forumkit\DTO\ThreadCommentaryDTO;
-use Dvojkat\Forumkit\Models\Thread;
+use DvojkaT\Forumkit\DTO\ThreadCommentaryDTO;
+use DvojkaT\Forumkit\Models\Thread;
 use DvojkaT\Forumkit\Models\ThreadCommentary;
-use Dvojkat\Forumkit\Notifications\NewCommentaryOrLikeNotification;
-use Dvojkat\Forumkit\Repositories\Abstracts\ThreadCommentaryRepositoryInterface;
+use DvojkaT\Forumkit\Notifications\NewCommentaryOrLikeNotification;
+use DvojkaT\Forumkit\Repositories\Abstracts\ThreadCommentaryRepositoryInterface;
 use DvojkaT\Forumkit\Repositories\Abstracts\ThreadRepositoryInterface;
-use Dvojkat\Forumkit\Services\Abstracts\ThreadCommentaryServiceInterface;
+use DvojkaT\Forumkit\Services\Abstracts\ThreadCommentaryServiceInterface;
 use Illuminate\Support\Collection;
 
 class ThreadCommentaryServiceEloquent implements ThreadCommentaryServiceInterface

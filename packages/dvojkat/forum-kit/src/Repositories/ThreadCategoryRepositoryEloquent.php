@@ -1,9 +1,9 @@
 <?php
 
-namespace Dvojkat\Forumkit\Repositories;
+namespace DvojkaT\Forumkit\Repositories;
 
 use DvojkaT\Forumkit\Models\ThreadCategory;
-use Dvojkat\Forumkit\Repositories\Abstracts\ThreadCategoryRepositoryInterface;
+use DvojkaT\Forumkit\Repositories\Abstracts\ThreadCategoryRepositoryInterface;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 class ThreadCategoryRepositoryEloquent extends BaseRepository implements ThreadCategoryRepositoryInterface

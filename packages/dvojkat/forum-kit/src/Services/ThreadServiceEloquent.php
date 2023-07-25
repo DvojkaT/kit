@@ -3,8 +3,8 @@
 namespace DvojkaT\Forumkit\Services;
 
 use App\Models\User;
-use Dvojkat\Forumkit\DTO\ThreadDTO;
-use Dvojkat\Forumkit\Models\Thread;
+use DvojkaT\Forumkit\DTO\ThreadDTO;
+use DvojkaT\Forumkit\Models\Thread;
 use DvojkaT\Forumkit\Repositories\Abstracts\ThreadRepositoryInterface;
 use DvojkaT\Forumkit\Services\Abstracts\ThreadServiceInterface;
 use Illuminate\Support\Collection;

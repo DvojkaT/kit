@@ -14,6 +14,7 @@ use Orchid\Filters\Types\WhereDateStartEnd;
 use Orchid\Platform\Models\User as Authenticatable;
 
 /**
+ * @property int $id
  * @property string $name
  * @property int $image_id
  * @property Collection<ThreadLike> $threadsLikes

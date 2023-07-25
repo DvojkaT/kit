@@ -2,10 +2,21 @@
 
 namespace DvojkaT\Forumkit\database\seeders;
 
+use DvojkaT\Forumkit\Models\Thread;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class ForumKitDatabaseSeeder extends Seeder
 {
+
+    /**
+     * @param array $parameters
+     * @return void
+     */
+    public function __invoke(array $parameters = []): void
+    {
+        $this->run();
+    }
+
     /**
      * Seed the application's database.
      */
@@ -15,6 +26,8 @@ class DatabaseSeeder extends Seeder
             ThreadCategorySeeder::class,
             ThreadSeeder::class
         ]);
+
+        Thread::factory()->count(25)->make();
 
     }
 }

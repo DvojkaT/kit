@@ -2,7 +2,6 @@
 
 namespace DvojkaT\Forumkit\Console\Commands;
 
-use DvojkaT\Forumkit\Providers\ForumConsoleServiceProvider;
 use Illuminate\Console\Command;
 
 class InstallCommand extends Command
@@ -34,11 +33,16 @@ class InstallCommand extends Command
             '--tag' => [
                 'forum-kit-migrations',
             ]]);
+//        $this->callSilent("vendor:publish", [
+//            '--tag' => [
+//                'forum-kit-factories',
+//            ]]);
         $this->info('Перенесены миграции');
         $this->callSilent('migrate');
         $this->info('Запущены миграции');
         $this->callSilent('storage:link');
         $this->changeUserModel();
+//        $this->factoryAsk();
 
         $this->info('Установлено!');
     }
@@ -58,5 +62,21 @@ class InstallCommand extends Command
         $user = file_get_contents(__DIR__.'/../../Models/User.stub');
         file_put_contents(app_path('Models/User.php'), $user);
 
+    }
+
+    /**
+     * @return $this
+     */
+    private function factoryAsk(): self
+    {
+        if (! $this->confirm('Заполнить тестовыми данными?')) {
+            return $this;
+        }
+
+        $this->callSilent('db:seed', [
+            '--class' => 'DvojkaT\\Forumkit\\Database\\Seeders\\ForumKitDatabaseSeeder'
+        ]);
+
+        return $this;
     }
 }

@@ -8,7 +8,9 @@
     },
     "autoload": {
         "psr-4": {
-            "DvojkaT\\Forumkit\\": "src/"
+            "DvojkaT\\Forumkit\\": "src/",
+            "DvojkaT\\Forumkit\\Database\\Seeders\\": "src/database/seeders",
+            "DvojkaT\\Forumkit\\database\\Factories\\": "src/database/factories"
         }
     },
     "authors": [
@@ -22,7 +24,8 @@
             "providers": [
                 "DvojkaT\\Forumkit\\Providers\\ForumServiceProvider",
                 "DvojkaT\\Forumkit\\Providers\\ForumServiceServiceProvider",
-                "DvojkaT\\Forumkit\\Providers\\ForumRepositoryServiceProvider"
+                "DvojkaT\\Forumkit\\Providers\\ForumRepositoryServiceProvider",
+                "DvojkaT\\Forumkit\\Providers\\ForumConsoleServiceProvider"
             ]
         }
     }

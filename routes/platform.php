@@ -13,6 +13,9 @@ use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
+use App\Orchid\Screens\Thread\ThreadEditScreen;
+use App\Orchid\Screens\Thread\ThreadListScreen;
+use App\Orchid\Screens\ThreadCategory\ThreadCategoryScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
@@ -33,6 +36,28 @@ use Tabuna\Breadcrumbs\Trail;
 // Main
 Route::screen('/main', PlatformScreen::class)
     ->name('platform.main');
+
+Route::screen('/threads/categories', ThreadCategoryScreen::class)
+    ->name('platform.threads.categories')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push('Категории тредов', route('platform.threads.categories')));
+
+Route::name('platform.threads')->group(function () {
+    Route::screen('/threads', ThreadListScreen::class)
+        ->breadcrumbs(fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push('Треды', route('platform.threads'))
+        );
+    Route::screen('/threads/{thread:id}/edit', ThreadEditScreen::class)
+        ->name('.edit')
+        ->breadcrumbs(function (Trail $trail, \DvojkaT\Forumkit\Models\Thread $thread)  {
+            return $trail
+                ->parent('platform.threads')
+                ->push("Редактирование треда #$thread->id");
+        });
+});
+
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)

@@ -438,7 +438,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/dvojkat/forum-kit",
-                "reference": "5d516aee29d8487362b4868dd76afd9905b798bd"
+                "reference": "006e69efe49db0757cda74e26cebdd6a2b773211"
             },
             "require": {
                 "orchid/platform": "^14.5",

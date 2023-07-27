@@ -75,7 +75,9 @@ class ExampleLayoutsScreen extends TestBaseScreen
             ]),
 
             Layout::accordion([
-                'Collapsible Group Item #1' => Layout::view('platform::dummy.block'),
+                Layout::accordion([
+                    'Collapsible Group Item #1' => Layout::view('platform::dummy.block'),
+                ]),
                 'Collapsible Group Item #2' => Layout::view('platform::dummy.block'),
                 'Collapsible Group Item #3' => Layout::view('platform::dummy.block'),
             ]),

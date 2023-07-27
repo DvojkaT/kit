@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Dvojkat\Forumkit\Models\Thread;
-use DvojkaT\Forumkit\Models\ThreadCommentary;
 use DvojkaT\Forumkit\Models\ThreadLike;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Passport\HasApiTokens;
+use Orchid\Attachment\Models\Attachment;
 use Orchid\Filters\Types\Like;
 use Orchid\Filters\Types\Where;
 use Orchid\Filters\Types\WhereDateStartEnd;
@@ -16,8 +16,10 @@ use Orchid\Platform\Models\User as Authenticatable;
 
 /**
  * @property string $name
+ * @property int $image_id
  * @property Collection<ThreadLike> $threadsLikes
  * @property Collection<ThreadLike> $commentariesLikes
+ * @property Attachment $image
  */
 class User extends Authenticatable
 {
@@ -97,5 +99,10 @@ class User extends Authenticatable
     {
         /** @phpstan-ignore-next-line */
         return $this->hasMany(ThreadLike::class, 'user_id', 'id')->where('likable_type', ThreadCommentary::class);
+    }
+
+    public function image(): HasOne
+    {
+        return $this->hasOne(Attachment::class, 'id', 'image_id');
     }
 }

@@ -16,9 +16,11 @@ use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\Thread\ThreadEditScreen;
 use App\Orchid\Screens\Thread\ThreadListScreen;
 use App\Orchid\Screens\ThreadCategory\ThreadCategoryScreen;
+use App\Orchid\Screens\ThreadCommentaries\ThreadCommentariesEditScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
+use DvojkaT\Forumkit\Models\ThreadCommentary;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -55,6 +57,16 @@ Route::name('platform.threads')->group(function () {
             return $trail
                 ->parent('platform.threads')
                 ->push("Редактирование треда #$thread->id");
+        });
+});
+
+Route::name('platform.threads.commentaries')->group(function () {
+    Route::screen('/commentaries/{commentary:id}', ThreadCommentariesEditScreen::class)
+        ->name('.edit')
+        ->breadcrumbs(function (Trail $trail, string|ThreadCommentary $commentary) {
+            return $trail
+                ->parent('platform.index')
+                ->push('Редактирование комментария');
         });
 });
 

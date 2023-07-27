@@ -2,7 +2,6 @@
 
 namespace App\Orchid\Screens\Thread\Layouts;
 
-use DvojkaT\Forumkit\Models\Thread;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Layouts\Rows;
 

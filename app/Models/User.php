@@ -17,6 +17,9 @@ use Orchid\Platform\Models\User as Authenticatable;
 /**
  * @property string $name
  * @property int $image_id
+ * @property boolean $is_banned
+ * @property string $ban_reason
+ * @property string $banned_until
  * @property Collection<ThreadLike> $threadsLikes
  * @property Collection<ThreadLike> $commentariesLikes
  * @property Attachment $image
@@ -34,6 +37,10 @@ class User extends Authenticatable
         'email',
         'password',
         'permissions',
+        'is_banned',
+        'banned_until',
+        'ban_reason',
+        'is_banned_forever'
     ];
 
     /**

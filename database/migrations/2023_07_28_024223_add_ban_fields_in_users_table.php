@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('image_id')->nullable();
-            $table->foreign('image_id')->references('id')->on('attachments')->onDelete('set null');
+            $table->boolean('is_banned')->default(false);
+            $table->string('ban_reason')->nullable();
+            $table->timestamp('banned_until')->nullable();
+            $table->boolean('is_banned_forever')->default(false);
         });
     }
 
@@ -23,7 +25,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('image_id');
+            $table->dropColumn('is_banned');
+            $table->dropColumn('ban_reason');
+            $table->dropColumn('banned_until');
+            $table->dropColumn('is_banned_forever');
         });
     }
 };

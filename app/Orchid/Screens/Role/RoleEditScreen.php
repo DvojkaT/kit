@@ -7,6 +7,7 @@ namespace App\Orchid\Screens\Role;
 use App\Orchid\Layouts\Role\RoleEditLayout;
 use App\Orchid\Layouts\Role\RolePermissionLayout;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Orchid\Platform\Models\Role;
 use Orchid\Screen\Action;
@@ -41,15 +42,7 @@ class RoleEditScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Edit Role';
-    }
-
-    /**
-     * Display header description.
-     */
-    public function description(): ?string
-    {
-        return 'Modify the privileges and permissions associated with a specific role.';
+        return 'Редактировать роль';
     }
 
     public function permission(): ?iterable
@@ -67,11 +60,11 @@ class RoleEditScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Button::make(__('Save'))
+            Button::make(__('Сохранить'))
                 ->icon('bs.check-circle')
                 ->method('save'),
 
-            Button::make(__('Remove'))
+            Button::make(__('Удалить'))
                 ->icon('bs.trash3')
                 ->method('remove')
                 ->canSee($this->role->exists),
@@ -105,14 +98,9 @@ class RoleEditScreen extends Screen
      */
     public function save(Request $request, Role $role)
     {
-        $request->validate([
-            'role.slug' => [
-                'required',
-                Rule::unique(Role::class, 'slug')->ignore($role),
-            ],
-        ]);
-
         $role->fill($request->get('role'));
+
+        $role->slug = Str::slug($role->name);
 
         $role->permissions = collect($request->get('permissions'))
             ->map(fn ($value, $key) => [base64_decode($key) => $value])
@@ -121,7 +109,7 @@ class RoleEditScreen extends Screen
 
         $role->save();
 
-        Toast::info(__('Role was saved'));
+        Toast::info(__('Роль сохранена'));
 
         return redirect()->route('platform.systems.roles');
     }
@@ -135,7 +123,7 @@ class RoleEditScreen extends Screen
     {
         $role->delete();
 
-        Toast::info(__('Role was removed'));
+        Toast::info(__('Роль удалена'));
 
         return redirect()->route('platform.systems.roles');
     }

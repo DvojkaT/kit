@@ -2,11 +2,13 @@
 
 namespace App\Orchid\Screens\Thread;
 
+use App\Models\User;
 use App\Orchid\Screens\Thread\Layouts\ThreadEditLayout;
 use App\Orchid\Screens\Thread\Layouts\ThreadEditSeoLayout;
 use App\Orchid\Screens\Thread\Layouts\ThreadShowLayout;
 use DvojkaT\Forumkit\Models\Thread;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
@@ -24,12 +26,16 @@ class ThreadEditScreen extends Screen
     /** @var array */
     private $layout;
 
+    /** @var User */
+    private $user;
+
     /**
      * @param Thread $thread
      * @return array
      */
     public function query(Thread $thread)
     {
+        $this->user = Auth::user();
         $thread->load(['commentaries', 'likes', 'image']);
         $this->thread = $thread;
         $thread->commentaries = $thread->commentariesTree();
@@ -42,7 +48,8 @@ class ThreadEditScreen extends Screen
         }
 
         return [
-            'thread' => $thread
+            'thread' => $thread,
+            'userPermissions' => $this->user->getRoles()
         ];
     }
 
@@ -52,9 +59,15 @@ class ThreadEditScreen extends Screen
     public function commandBar()
     {
         return [
+            Button::make('Удалить')
+                ->type(Color::DANGER)
+                ->method('remove')
+                ->canSee($this->user->hasAccess(config('orchid-permissions.threads.permissions.delete'))),
+
             Button::make('Сохранить')
                 ->type(Color::SUCCESS)
                 ->method('createUpdate')
+                ->canSee($this->user->hasAccess(config('orchid-permissions.threads.permissions.update'))),
         ];
     }
 

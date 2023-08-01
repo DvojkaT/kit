@@ -34,7 +34,6 @@ class ThreadListLayout extends Table
                 ->cantHide()
                 ->filter(Input::make())
                 ->render(function (Thread $item) {
-                    return Link::make($item->title)->route('platform.threads.edit', $item);
                 }),
 
             TD::make('created_at', 'Дата создания')

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use DvojkaT\Forumkit\Models\Thread;
+use DvojkaT\Forumkit\Models\ThreadCommentary;
 use DvojkaT\Forumkit\Models\ThreadLike;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;

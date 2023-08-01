@@ -22,9 +22,8 @@ class RoleEditLayout extends Rows
                 ->type('text')
                 ->max(255)
                 ->required()
-                ->title(__('Name'))
-                ->placeholder(__('Name'))
-                ->help(__('Role display name')),
+                ->title('Название')
+                ->placeholder('Название')
         ];
     }
 }

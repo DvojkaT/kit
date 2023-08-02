@@ -23,14 +23,22 @@ class OrchidPermissionsServiceProvider extends ServiceProvider
     private function getPermissions(): array
     {
         $permissions = [];
-        foreach (config('orchid-permissions') as $permissionKey => $permission) {
-            $group = ItemPermission::group($permission['name']);
-            foreach ($permission['permissions'] as $key => $item) {
-                $group = $group->addPermission("$permissionKey.$key", $item);
+        foreach (config('orchid-permissions.platform.sections') as $sectionName => $sectionData) {
+            $group = ItemPermission::group($sectionData['name']);
+            foreach ($sectionData['permissions'] as $permissionKey => $permissionName) {
+                $group = $group->addPermission("$sectionName.$permissionKey", $permissionName);
             }
             $permissions[] = $group;
         }
 
+//        foreach (config('orchid-permissions') as $permissionKey => $permission) {
+//            $group = ItemPermission::group($permission['name']);
+//            foreach ($permission['permissions'] as $key => $item) {
+//                $group = $group->addPermission("$permissionKey.$key", $item);
+//            }
+//            $permissions[] = $group;
+//        }
+//
         return $permissions;
     }
 }

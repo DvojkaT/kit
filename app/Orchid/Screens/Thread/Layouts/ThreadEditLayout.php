@@ -14,7 +14,6 @@ class ThreadEditLayout extends Rows
 
     protected function fields(): iterable
     {
-        $hasAccess = $this->query->get('user')->hasAccess(config('orchid-permissions.threads.permissions.update'));;
         return [
             Input::make('thread.title')
                 ->title('Название')

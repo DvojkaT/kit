@@ -27,8 +27,6 @@ class ThreadListScreen extends Screen
      */
     public function query(): array
     {
-        dd(array_keys(config('orchid-permissions')));
-        dd(Auth::user()->hasAccess(array_keys(config('orchid-permissions.threads')[0])));
         return [
             'threads' => Thread::filters()->defaultSort('id')->paginate(config('pagination.orchid.base')),
             'user' => Auth::user()

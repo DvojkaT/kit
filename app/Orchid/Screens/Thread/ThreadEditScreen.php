@@ -49,7 +49,7 @@ class ThreadEditScreen extends Screen
 
         return [
             'thread' => $thread,
-            'userPermissions' => $this->user->getRoles()
+            'user' => $this->user
         ];
     }
 
@@ -62,12 +62,12 @@ class ThreadEditScreen extends Screen
             Button::make('Удалить')
                 ->type(Color::DANGER)
                 ->method('remove')
-                ->canSee($this->user->hasAccess(config('orchid-permissions.threads.permissions.delete'))),
+                ->canSee($this->user->hasAccess(config('orchid-permissions.platform-check.threads.delete'))),
 
             Button::make('Сохранить')
                 ->type(Color::SUCCESS)
                 ->method('createUpdate')
-                ->canSee($this->user->hasAccess(config('orchid-permissions.threads.permissions.update'))),
+                ->canSee($this->checkPermissionForUpdateCreateButton())
         ];
     }
 
@@ -112,5 +112,19 @@ class ThreadEditScreen extends Screen
                 'SEO' => ThreadEditSeoLayout::class
             ])
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    private function checkPermissionForUpdateCreateButton(): bool
+    {
+        if(
+            ($this->thread->exists && $this->user->hasAccess(config('orchid-permissions.platform-check.threads.update')))
+        ||  (!$this->thread->exists && $this->user->hasAccess(config('orchid-permissions.platform-check.threads.create')))) {
+            return true;
+        }
+
+        return false;
     }
 }

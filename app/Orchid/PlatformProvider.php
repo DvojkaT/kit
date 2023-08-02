@@ -37,6 +37,7 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Треды')
                 ->title('Треды')
                 ->route('platform.threads')
+                ->permission(config('orchid-permissions.platform-check.threads.view'))
                 ->active(['platform.threads', 'platform.threads.edit']),
 
             Menu::make('Категории')
@@ -47,13 +48,13 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make(__('Users'))
                 ->icon('bs.people')
                 ->route('platform.systems.users')
-                ->permission('platform.systems.users')
+//                ->permission('platform.systems.users')
                 ->title(__('Access Controls')),
 
             Menu::make(__('Roles'))
                 ->icon('bs.lock')
                 ->route('platform.systems.roles')
-                ->permission('platform.systems.roles')
+//                ->permission('platform.systems.roles')
                 ->divider(),
         ];
     }
@@ -66,9 +67,9 @@ class PlatformProvider extends OrchidServiceProvider
     public function permissions(): array
     {
         return [
-            ItemPermission::group(__('System'))
-                ->addPermission('platform.systems.roles', __('Roles'))
-                ->addPermission('platform.systems.users', __('Users')),
+//            ItemPermission::group(__('System'))
+//                ->addPermission('platform.systems.roles', __('Roles'))
+//                ->addPermission('platform.systems.users', __('Users')),
         ];
     }
 }
